@@ -1,20 +1,31 @@
 <template>
   <div id="app">
-    <h1>Attempt at pjm app</h1>
-    <PJForm
-      @onNewProject="handleNewProject"
-    />
+    <nav class="navbar navbar-expand-sm bg-light">
+      <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">PJM-App</span>
+      </div>
+    </nav>
 
-    <ProjItem 
-      v-for="proj in projectList" 
-      :key="proj.id" 
-      :proj="proj"
-      @onToggleProj="handleToggleProj"
-      @onToggleEditProj="handleToggleEditProj"
-      @onUpdateProj="handleUpdateProj"
-      @onRemoveProj="handleRemoveProj"
-    />
+    <div class="grid-container">
+      <div class="form-container" >
+        <h2 style="margin-top: 10px;">Add new Project</h2>
+        <PJForm
+          @onNewProject="handleNewProject"
+        />
+      </div>
 
+      <div class="project-container">
+        <ProjItem 
+          v-for="proj in projectList" 
+          :key="proj.id" 
+          :proj="proj"
+          @onToggleProj="handleToggleProj"
+          @onToggleEditProj="handleToggleEditProj"
+          @onUpdateProj="handleUpdateProj"
+          @onRemoveProj="handleRemoveProj"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -37,6 +48,7 @@ export default {
 
   methods: {
     handleNewProject(newProj){
+      console.log(newProj)
       this.projectList.push(newProj)
     },
 
@@ -70,8 +82,6 @@ export default {
 }
 </script>
 
-
-
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -79,12 +89,17 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
-PJForm{
-  padding: 10px;
+.grid-container {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr;
 }
-ProjItem{
-  padding: 5px;
+.form-container{
+  margin-top: 15px;
 }
+.project-container{
+  margin-top: 15px;
+  text-align: left;
+}
+
 </style>
